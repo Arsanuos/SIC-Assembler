@@ -1,0 +1,109 @@
+01000 COPY     START   0x1000
+01000 FIRST    STL     ENDFIL
+01003 CLOOP    JSUB    RDREC
+01006          LDA     *
+.Invalid label name:    *        COMP    =c'AJdd'
+01009 test     equ     5-3
+01009 test2    equ     *
+01009          JEQ     ENDFIL
+0100c seCond   equ     first
+0100c          JSUB    WRREC
+0100f          J       CLOOP
+01012          ltorg
+01012 ENDFIL   LDA     E*OF
+.Invalid label name:    *        STA     =x'4535'
+01015 test3    equ     *
+01015          LDA     ENDFIL
+01018          STA     =3
+01012          org     EndFil
+01012          JSUB    =x'45'
+01015          LDL     =65
+01018          RSUB
+0101b          ltorg
+0101b *        3
+0101e *        x'45'
+0101f *        65
+01022 E*OF     BYTE    C'EOF'
+01025 THREE    WORD    3
+01028 ZERO     WORD    0
+0102b RETADR   RESW    1
+0102e LENGTH   RESW    1
+01031 BUFFER   RESW    4096
+04031 RDREC    LDX     ZERO
+04034          LDA     ZERO
+04037 RLOOP    TD      *
+01022          org     e*of
+01000          org     0x1000
+01000          JEQ     RLOOP
+01003          RD      INPUT
+01006          COMP    ZERO
+01009          JEQ     *
+0100c          STCH    BUFFER,X
+01022          org
+01022          TIX     =3
+01025          JLT     RLOOP
+01028 EXIT     STX     =45
+0102b          RSUB
+0102e INPUT    BYTE    X'F1'
+0102f MAXLEN   WORD    4096
+01032 WRREC    LDX     ZERO
+01035 WLOOP    TD      OUTPUT
+01038          JEQ     =34
+0103b          LDCH    BUFFER,X
+0103e          WD      OUTPUT
+01041          TIX     LENGTH
+01044          JLT     WLOOP
+01047          RSUB
+0104a OUTPUT   BYTE    X'05'
+               END     FIRST
+0104b *        45
+0104e *        34
+
+
+SymbolTable:
++-------------+-----------------+
+| Symbol Name | Address(in hex) | 
++-------------+-----------------+
+| ZERO        | 1028            | 
++-------------+-----------------+
+| INPUT       | 102e            | 
++-------------+-----------------+
+| test        | 2               | 
++-------------+-----------------+
+| WRREC       | 1032            | 
++-------------+-----------------+
+| OUTPUT      | 104a            | 
++-------------+-----------------+
+| ENDFIL      | 1012            | 
++-------------+-----------------+
+| LENGTH      | 102e            | 
++-------------+-----------------+
+| FIRST       | 1000            | 
++-------------+-----------------+
+| RETADR      | 102b            | 
++-------------+-----------------+
+| BUFFER      | 1031            | 
++-------------+-----------------+
+| RLOOP       | 4037            | 
++-------------+-----------------+
+| test2       | 1009            | 
++-------------+-----------------+
+| test3       | 1015            | 
++-------------+-----------------+
+| MAXLEN      | 102f            | 
++-------------+-----------------+
+| CLOOP       | 1003            | 
++-------------+-----------------+
+| WLOOP       | 1035            | 
++-------------+-----------------+
+| seCond      | 1000            | 
++-------------+-----------------+
+| E*OF        | 1022            | 
++-------------+-----------------+
+| RDREC       | 4031            | 
++-------------+-----------------+
+| EXIT        | 1028            | 
++-------------+-----------------+
+| THREE       | 1025            | 
++-------------+-----------------+
+

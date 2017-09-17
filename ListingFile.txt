@@ -1,0 +1,63 @@
+01000  COPY     START   0x1000
+01000  FIRST    STL     ENDFIL            141019
+01003  CLOOP    JSUB    RDREC             48403A
+01006           LDA     *                 001006
+01009           COMP    =c'AJdd'          281015
+0100c  test     equ     5-3
+0100c  test2    equ     *
+0100c           JEQ     ENDFIL            301019
+0100f  seCond   equ     first
+0100f           JSUB    WRREC             48103B
+01012           J       CLOOP             3C1003
+01015           ltorg
+01015  *        c'AJdd'                   414A64
+                                          64
+01019  ENDFIL   LDA     E*OF              00102B
+0101c           STA     =x'4535'          0C1022
+0101f  test3    equ     *
+0101f           LDA     ENDFIL            001019
+01022           STA     =3                0C1024
+01019           org     EndFil
+01019           JSUB    =x'45'            481027
+0101c           LDL     =65               081028
+0101f           RSUB                      4C0000
+01022           ltorg
+01022  *        x'4535'                   4535
+01024  *        3                         3
+01027  *        x'45'                     45
+01028  *        65                        41
+0102b  E*OF     BYTE    C'EOF'            454F46
+0102e  THREE    WORD    3                 000003
+01031  ZERO     WORD    0                 000000
+01034  RETADR   RESW    1
+01037  LENGTH   RESW    1
+0103a  BUFFER   RESW    4096
+0403a  RDREC    LDX     ZERO              041031
+0403d           LDA     ZERO              001031
+04040  RLOOP    TD      *                 E04040
+0102b           org     e*of
+01000           org     0x1000
+01000           JEQ     RLOOP             304040
+01003           RD      INPUT             D81037
+01006           COMP    ZERO              281031
+01009           JEQ     *                 301009
+0100c           STCH    BUFFER,X          54903A
+0102b           org
+0102b           TIX     =3                2C1024
+0102e           JLT     RLOOP             384040
+01031  EXIT     STX     =45               101054
+01034           RSUB                      4C0000
+01037  INPUT    BYTE    X'F1'             F1
+01038  MAXLEN   WORD    4096              001000
+0103b  WRREC    LDX     ZERO              041031
+0103e  WLOOP    TD      OUTPUT            E01053
+01041           JEQ     =34               301057
+01044           LDCH    BUFFER,X          50903A
+01047           WD      OUTPUT            DC1053
+0104a           TIX     LENGTH            2C1037
+0104d           JLT     WLOOP             38103E
+01050           RSUB                      4C0000
+01053  OUTPUT   BYTE    X'05'             05
+               END     FIRST
+01054  *        45                        2D
+01057  *        34                        22
