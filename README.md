@@ -5,7 +5,7 @@
 in Alexandria university.
 * Our team tried to make this project more 
 ### Purpose
-* The purpose of developing this project is to get more familiar with how the assembler works and how the assemblers usually treats 
+* The purpose of developing this project is to get more familiar with how the assembler works and how the assemblers usually treat 
 different types of errors.
-* Another special thing in this project is string parsing that this was the backbone of this project the thing that our team spend 
-time to make full use of the knowledge our team can gain and to make as clean as possible.
+* Another special thing in this project is string parsing that thing was the backbone of this project the thing that our team spend 
+time to make full use of the knowledge our team can gain from this project and to make it as clean as possible.
