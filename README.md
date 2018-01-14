@@ -3,7 +3,7 @@
 * A 2-pass assembler for a hypothetical machine.
 * That project was an applications on Systems programming course at 2nd year in computer and systems engineering department
 in Alexandria university.
-* Our team tried to make this project more 
+
 ### Purpose
 * The purpose of developing this project is to get more familiar with how the assembler works and how the assemblers usually treat 
 different types of errors.
